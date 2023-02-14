@@ -1,0 +1,30 @@
+{
+  "author": "chenglu4343",
+  "description": "",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "ISC",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "name": "@chenglu4343/util",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "bump:major": "nr -r bump:major && npx bumpp major --all --yes",
+    "bump:minor": "nr -r bump:minor && npx bumpp minor --all --yes",
+    "bump:patch": "nr -r bump:patch && npx bumpp patch --all --yes",
+    "dev": "unbuild --stub"
+  },
+  "type": "module",
+  "version": "0.0.2"
+}
