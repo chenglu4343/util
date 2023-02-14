@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 16
       - run: npm install -g @antfu/ni
-      - run: npm install -g @antfu/pnpm
+      - run: npm install -g pnpm
       - run: ni
       - run: nr -F @chenglu4343/util build
 
