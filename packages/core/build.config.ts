@@ -3,7 +3,7 @@ import { defineBuildConfig } from 'unbuild'
 export default defineBuildConfig({
   outDir: './dist',
   entries: [
-    './index',
+    './src/index',
   ],
   declaration: true,
   clean: true,
