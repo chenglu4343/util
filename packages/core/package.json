@@ -1,6 +1,6 @@
 {
   "author": "chenglu4343",
-  "description": "",
+  "description": "simple util",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -11,12 +11,21 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/chenglu4343/util",
+  "keywords": [
+    "ts",
+    "utils"
+  ],
   "license": "ISC",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "name": "@chenglu4343/util",
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenglu4343/util.git"
   },
   "scripts": {
     "build": "unbuild",
