@@ -29,9 +29,9 @@
   },
   "scripts": {
     "build": "unbuild",
-    "bump:major": "nr -r bump:major && npx bumpp major --all --yes",
-    "bump:minor": "nr -r bump:minor && npx bumpp minor --all --yes",
-    "bump:patch": "nr -r bump:patch && npx bumpp patch --all --yes",
+    "bump:major": "npx bumpp major --all --yes",
+    "bump:minor": "npx bumpp minor --all --yes",
+    "bump:patch": "npx bumpp patch --all --yes",
     "dev": "unbuild --stub"
   },
   "type": "module",
