@@ -4,3 +4,5 @@ export function doSomeOne(strategy: [condition: boolean, exec: () => void][]) {
     return condition;
   });
 }
+
+
