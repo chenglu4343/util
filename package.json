@@ -10,9 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "bumpp": "^8.2.1",
-    "unbuild": "^1.1.1"
-  },
-  "dependencies": {
-    "vitest": "^0.29.2"
+    "unbuild": "^1.1.1",
+    "vitepress": "1.0.0-alpha.49",
+    "vitest": "^0.29.2",
+    "vue": "^3.2.47"
   }
 }
