@@ -20,8 +20,7 @@ function getItems(relativePath: string): DefaultTheme.SidebarItem[] {
 	const filesDir = path.resolve(__dirname, relativePath).replaceAll('\\', '/')
 	const upFileDir = path.resolve(__dirname, '../').replaceAll('\\', '/')
 	const basicRoute = filesDir.split(upFileDir)[1]
-	console.log('basicRoute', basicRoute)
-
+	
 	const mdList = fg
 		.sync(`${filesDir}/**/*.md`)
 		.map((filePath) => filePath.split('/').at(-1).split('.')[0])
