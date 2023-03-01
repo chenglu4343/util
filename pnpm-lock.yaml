@@ -5,12 +5,14 @@ importers:
   .:
     specifiers:
       bumpp: ^8.2.1
+      fast-glob: ^3.2.12
       unbuild: ^1.1.1
       vitepress: 1.0.0-alpha.49
       vitest: ^0.29.2
       vue: ^3.2.47
     devDependencies:
       bumpp: 8.2.1
+      fast-glob: 3.2.12
       unbuild: 1.1.1
       vitepress: 1.0.0-alpha.49
       vitest: 0.29.2
