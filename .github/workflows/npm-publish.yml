@@ -10,7 +10,7 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       - run: npm install -g @antfu/ni
       - run: npm install -g pnpm
       - run: ni
-      - run: nr -F @chenglu4343/util build
+
 
   publish-npm:
     needs: build
@@ -31,6 +31,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: nr -F @chenglu4343/util build
       - run: ls
       - run: cd packages/core/ && ls && npm publish
         env:
