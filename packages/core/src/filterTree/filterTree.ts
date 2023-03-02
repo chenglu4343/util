@@ -14,7 +14,7 @@ interface CommonOption<T> {
   /** 自定义hide方法，如果返回为true则hide */
   customHide: (treeItem: T, option: CustomOption<T>) => boolean
 
-  /** 可以添加一些除了children的额外的属性 */
+  /** 可以添加一些额外的属性 */
   setNewTreeItem: (treeItem: T, option: CustomOption<T>) => T
 
   /** 对于children为空数组时，是否替换为undefined，默认不替换 */
@@ -96,8 +96,8 @@ function filterTreeItem<T>(treeItem: T, options: FilterTreeItemOptions<T>): T[] 
 
   const newChildren = getFilterChildren() as T[]
 
-  return {
-    ...setNewTreeItem(treeItem, customOption),
+  return setNewTreeItem({
+    ...treeItem,
     [children]: (newChildren.length === 0 && replaceUndef) ? undefined : newChildren,
-  }
+  }, customOption)
 }

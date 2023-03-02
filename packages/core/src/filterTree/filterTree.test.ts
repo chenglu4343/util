@@ -96,7 +96,7 @@ describe('test filterTree', () => {
           isActive: true,
           children: [
             {
-              label: '无效属性',
+              label: '有效属性',
               children: [],
             },
           ],
@@ -109,7 +109,12 @@ describe('test filterTree', () => {
         {
           label: '0-1',
           isActive: true,
-          children: [],
+          children: [
+            {
+              label: '有效属性',
+              children: [],
+            },
+          ],
         },
       ]),
     ).toBe(true)
