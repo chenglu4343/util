@@ -10,29 +10,10 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
       
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'
+    # nothing
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm install -g @antfu/ni
-      - run: npm install -g pnpm
-      - run: ni
-
-
   publish-npm:
-    needs: install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -40,6 +21,9 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: npm install -g @antfu/ni
+      - run: npm install -g pnpm
+      - run: ni
       - run: nr -F @chenglu4343/util build
       - run: ls
       - run: cd packages/core/ && ls && npm publish
