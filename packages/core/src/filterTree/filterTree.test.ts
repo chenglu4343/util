@@ -119,4 +119,18 @@ describe('test filterTree', () => {
       ]),
     ).toBe(true)
   })
+
+  it('访问到正确的children', () => {
+    const tree = createTree()
+    const arr: number[] = []
+    filterTree(tree, {
+      hideLevels: [1, 2, 3],
+      setNewTreeItem(treeItem) {
+        arr.push(treeItem.children.length)
+        return treeItem
+      },
+    })
+
+    expect(arr.every(item => item === 0)).toBe(true)
+  })
 })
