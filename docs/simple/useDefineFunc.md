@@ -7,19 +7,18 @@
 ### 定义
 ```ts
 function useXXX(option?: { afterClose?: () => void }) {
-	const { func: afterClose, defineFunc: defineAfterClose } = useDefineFunc(option?.afterClose)
+  const { func: afterClose, defineFunc: defineAfterClose } = useDefineFunc(option?.afterClose)
 
-	// xxx
-	const close = () => {
-		// xxx
-		afterClose()
-	}
+  // xxx
+  const close = () => {
+    // xxx
+    afterClose()
+  }
 
-	return {
-		defineAfterClose,
-	}
+  return {
+    defineAfterClose,
+  }
 }
-
 ```
 
 ### 使用
@@ -27,8 +26,6 @@ function useXXX(option?: { afterClose?: () => void }) {
 const { defineAfterClose } = useXXX()
 
 defineAfterClose(() => {
-	//xxx
+  // xxx
 })
-
-
 ```

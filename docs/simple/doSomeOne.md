@@ -10,19 +10,19 @@ const isHasPermission = false
 doSomeOne([
   [
     !isLogin,
-    ()=>{
+    () => {
       // xxx
     }
   ],
   [
     !isHasPermission,
-    ()=>{
+    () => {
       // xxx
     }
   ],
   [
     isLogin && isHasPermission,
-    ()=>{
+    () => {
       // xxx
     }
   ]

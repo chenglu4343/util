@@ -1,4 +1,4 @@
-export const name='util'
+export const name = 'util'
 
 export * from './doSomeOne'
 export * from './useDefineFunc'

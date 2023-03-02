@@ -1,35 +1,32 @@
 {
-  "author": "chenglu4343",
-  "dependencies": {
-    "lodash-es": "^4.17.21"
-  },
-  "description": "simple util",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "homepage": "https://util-docs.vercel.app/",
-  "keywords": [
-    "ts",
-    "utils"
-  ],
-  "license": "ISC",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
   "name": "@chenglu4343/util",
-  "publishConfig": {
-    "access": "public"
-  },
+  "type": "module",
+  "version": "0.0.14",
+  "description": "simple util",
+  "author": "chenglu4343",
+  "license": "ISC",
+  "homepage": "https://util-docs.vercel.app/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chenglu4343/util.git"
   },
+  "keywords": [
+    "ts",
+    "utils"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "unbuild",
     "bump:major": "npx bumpp major --all --yes",
@@ -37,7 +34,10 @@
     "bump:patch": "npx bumpp patch --all --yes",
     "dev": "unbuild --stub"
   },
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "version": "0.0.14"
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
