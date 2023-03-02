@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "composite": true,
     "esModuleInterop": true,
     "lib": [
       "es2021"
     ]
   },
   "include": [
-    "docs/.vitepress/**/*.ts"
+    ".vitepress/**/*.ts"
   ]
 }

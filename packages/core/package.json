@@ -1,5 +1,8 @@
 {
   "author": "chenglu4343",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
   "description": "simple util",
   "exports": {
     ".": {
