@@ -16,10 +16,13 @@ interface CommonOption<T> {
 
   /** 可以添加一些除了children的额外的属性 */
   setNewTreeItem: (treeItem: T, option: CustomOption<T>) => T
+
+  /** 对于children为空数组时，是否替换为undefined，默认不替换 */
+  replaceUndef: boolean
 }
 
 interface Options<T> extends Partial<CommonOption<T>> {
-  /** 默认为0 */
+  /** 顶层树的节点，默认为0 */
   topLevel?: number
 }
 
@@ -39,6 +42,7 @@ export function filterTree<T>(tree: T[], options?: Options<T>) {
     topLevel = 0,
     hideLevels = [],
     hideAction = 'append',
+    replaceUndef = false,
     customHide = () => false,
     setNewTreeItem = (treeItem: T) => treeItem,
   } = options || {}
@@ -51,6 +55,7 @@ export function filterTree<T>(tree: T[], options?: Options<T>) {
         children,
         hideAction,
         father: null,
+        replaceUndef,
         customHide,
         setNewTreeItem,
       }),
@@ -64,7 +69,7 @@ export function filterTree<T>(tree: T[], options?: Options<T>) {
  * 其他情况返回一个新的 treeItem
  *  */
 function filterTreeItem<T>(treeItem: T, options: FilterTreeItemOptions<T>): T[] | T {
-  const { currentLevel, hideLevels, children, hideAction, customHide, setNewTreeItem, father } = options
+  const { currentLevel, hideLevels, children, hideAction, father, replaceUndef, customHide, setNewTreeItem } = options
 
   if (isNil(treeItem))
     return []
@@ -89,8 +94,10 @@ function filterTreeItem<T>(treeItem: T, options: FilterTreeItemOptions<T>): T[] 
       .flat()
   }
 
+  const newChildren = getFilterChildren() as T[]
+
   return {
     ...setNewTreeItem(treeItem, customOption),
-    [children]: getFilterChildren(),
+    [children]: (newChildren.length === 0 && replaceUndef) ? undefined : newChildren,
   }
 }

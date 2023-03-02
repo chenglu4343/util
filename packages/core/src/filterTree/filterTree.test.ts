@@ -41,6 +41,23 @@ describe('test filterTree', () => {
     ).toBe(true)
   })
 
+  it('隐藏level 0，后续显示，children为undefined', () => {
+    const tree = createTree()
+    const newTree = filterTree(tree, {
+      hideLevels: [0],
+      replaceUndef: true,
+    })
+
+    expect(
+      isEqual(newTree, [
+        {
+          label: '0-1',
+          children: undefined,
+        },
+      ]),
+    ).toBe(true)
+  })
+
   it('隐藏level 0，但是隐藏后续显示', () => {
     const tree = createTree()
     const newTree = filterTree(tree, {
