@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import { isEqual } from 'lodash-es'
 import { filterTree } from './filterTree'
 
 const createTree = () => [
@@ -22,7 +21,7 @@ describe('test filterTree', () => {
   it('no options noChange', () => {
     const tree = createTree()
     const newTree = filterTree(tree)
-    expect(isEqual(newTree, tree)).toBe(true)
+    expect(newTree).toEqual(tree)
   })
 
   it('隐藏level 0，后续显示', () => {
@@ -31,14 +30,12 @@ describe('test filterTree', () => {
       hideLevels: [0],
     })
 
-    expect(
-      isEqual(newTree, [
-        {
-          label: '0-1',
-          children: [],
-        },
-      ]),
-    ).toBe(true)
+    expect(newTree).toEqual([
+      {
+        label: '0-1',
+        children: [],
+      },
+    ])
   })
 
   it('隐藏level 0，后续显示，children为undefined', () => {
@@ -48,14 +45,12 @@ describe('test filterTree', () => {
       replaceUndef: true,
     })
 
-    expect(
-      isEqual(newTree, [
-        {
-          label: '0-1',
-          children: undefined,
-        },
-      ]),
-    ).toBe(true)
+    expect(newTree).toEqual([
+      {
+        label: '0-1',
+        children: undefined,
+      },
+    ])
   })
 
   it('隐藏level 0，但是隐藏后续显示', () => {
@@ -65,7 +60,7 @@ describe('test filterTree', () => {
       hideAction: 'hide',
     })
 
-    expect(isEqual(newTree, [])).toBe(true)
+    expect(newTree).toEqual([])
   })
 
   it('隐藏level 0 ,1 ，全部消失', () => {
@@ -74,7 +69,7 @@ describe('test filterTree', () => {
       hideLevels: [0, 1],
     })
 
-    expect(isEqual(newTree, [])).toBe(true)
+    expect(newTree).toEqual([])
   })
 
   it('通过customHide ，全部消失', () => {
@@ -83,7 +78,7 @@ describe('test filterTree', () => {
       customHide: () => true,
     })
 
-    expect(isEqual(newTree, [])).toBe(true)
+    expect(newTree).toEqual([])
   })
 
   it('添加新属性', () => {
@@ -104,20 +99,18 @@ describe('test filterTree', () => {
       },
     })
 
-    expect(
-      isEqual(newTree, [
-        {
-          label: '0-1',
-          isActive: true,
-          children: [
-            {
-              label: '有效属性',
-              children: [],
-            },
-          ],
-        },
-      ]),
-    ).toBe(true)
+    expect(newTree).toEqual([
+      {
+        label: '0-1',
+        isActive: true,
+        children: [
+          {
+            label: '有效属性',
+            children: [],
+          },
+        ],
+      },
+    ])
   })
 
   it('访问到正确的children', () => {
