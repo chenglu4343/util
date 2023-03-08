@@ -126,4 +126,21 @@ describe('test filterTree', () => {
 
     expect(arr.every(item => item === 0)).toBe(true)
   })
+
+  it('访问到正确的father', () => {
+    const tree = createTree()
+
+    filterTree(tree, {
+      setTreeItemTrigger: 'before',
+      setNewTreeItem(treeItem, { father }) {
+        if (treeItem.label === '0-1')
+          expect((father as any).key).toBe('0')
+
+        return {
+          ...treeItem,
+          key: treeItem.label,
+        }
+      },
+    })
+  })
 })

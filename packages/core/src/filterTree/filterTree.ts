@@ -17,6 +17,9 @@ interface CommonOption<T> {
   /** 可以添加一些额外的属性 */
   setNewTreeItem: (treeItem: T, option: CustomOption<T>) => T
 
+  /** 设置新属性的时机，before可以拿到较新的father值，after可以拿到较新的children值，默认为after */
+  setTreeItemTrigger: 'before' | 'after'
+
   /** 对于children为空数组时，是否替换为undefined，默认不替换 */
   replaceUndef: boolean
 }
@@ -45,6 +48,7 @@ export function filterTree<T>(tree: T[], options?: Options<T>) {
     replaceUndef = false,
     customHide = () => false,
     setNewTreeItem = (treeItem: T) => treeItem,
+    setTreeItemTrigger = 'after',
   } = options || {}
 
   return tree
@@ -58,6 +62,7 @@ export function filterTree<T>(tree: T[], options?: Options<T>) {
         replaceUndef,
         customHide,
         setNewTreeItem,
+        setTreeItemTrigger,
       }),
     )
     .flat()
@@ -69,7 +74,7 @@ export function filterTree<T>(tree: T[], options?: Options<T>) {
  * 其他情况返回一个新的 treeItem
  *  */
 function filterTreeItem<T>(treeItem: T, options: FilterTreeItemOptions<T>): T[] | T {
-  const { currentLevel, hideLevels, children, hideAction, father, replaceUndef, customHide, setNewTreeItem } = options
+  const { currentLevel, hideLevels, children, hideAction, father, replaceUndef, setTreeItemTrigger, customHide, setNewTreeItem } = options
 
   if (isNil(treeItem))
     return []
@@ -80,24 +85,32 @@ function filterTreeItem<T>(treeItem: T, options: FilterTreeItemOptions<T>): T[] 
   }
 
   if (hideLevels.includes(currentLevel) || customHide(treeItem, customOption))
-    return hideAction === 'append' ? getFilterChildren() : []
+    return hideAction === 'append' ? getFilterChildren(father) : []
 
-  function getFilterChildren() {
+  /** 处理children的遍历 */
+  function getFilterChildren(newFather?: any) {
     return (treeItem[children] || [])
       .map((childItem: any) =>
         filterTreeItem(childItem, {
           ...options,
-          father: treeItem,
+          father: newFather || treeItem,
           currentLevel: currentLevel + 1,
         }),
       )
       .flat()
   }
 
-  const newChildren = getFilterChildren() as T[]
+  if (setTreeItemTrigger === 'before') {
+    const newItem = setNewTreeItem(treeItem, customOption)
+    newItem[children] = getFilterChildren(newItem) as T[]
+    return newItem
+  }
+  else {
+    const newChildren = getFilterChildren() as T[]
 
-  return setNewTreeItem({
-    ...treeItem,
-    [children]: (newChildren.length === 0 && replaceUndef) ? undefined : newChildren,
-  }, customOption)
+    return setNewTreeItem({
+      ...treeItem,
+      [children]: (newChildren.length === 0 && replaceUndef) ? undefined : newChildren,
+    }, customOption)
+  }
 }
