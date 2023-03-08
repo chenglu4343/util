@@ -102,8 +102,12 @@ function filterTreeItem<T>(treeItem: T, options: FilterTreeItemOptions<T>): T[] 
 
   if (setTreeItemTrigger === 'before') {
     const newItem = setNewTreeItem(treeItem, customOption)
-    newItem[children] = getFilterChildren(newItem) as T[]
-    return newItem
+    const newChildren = getFilterChildren(newItem) as T[]
+
+    return {
+      ...newItem,
+      [children]: (newChildren.length === 0 && replaceUndef) ? undefined : newChildren,
+    }
   }
   else {
     const newChildren = getFilterChildren() as T[]
